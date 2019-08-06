@@ -1,0 +1,205 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Backend.Master.cs" Inherits="Bai21.SiteMaster" %>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Đọc Báo Online</title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/ckeditor/all.css" rel="stylesheet" />
+
+    <%--<asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>--%>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+    
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+
+    <script type="text/javascript">
+        {
+           window.onload = function()
+        {
+            deleteUser(10000);
+        };
+
+
+            function get1() {
+                alert("test4");
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert("200");
+                        alert("text" + this.responseURL);
+                        alert("text3" + this.responseText);
+                        //document.getElementById("div1").innerHTML(this.responseText);
+
+
+                    }
+                };
+                xhttp.open("POST", "Users.aspx?k=1", true);
+             //   xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+               // xhttp.send('{LaixeID: "1" }');
+                 xhttp.send();
+
+            }
+        }
+        function get2() {
+           alert("GET2");
+             var table = document.getElementById("myTable");
+             var row = table.insertRow(3);
+             var cell1 = row.insertCell(0);
+             var cell2 = row.insertCell(1);
+              cell1.innerHTML = "NEW CELL1";
+            cell2.innerHTML = "NEW CELL2";
+           //return false;
+        }
+
+                    //  ----------------------------------------------
+        function deleteUser(id) {
+           
+               
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert("okk");
+                       
+
+                       // document.getElementById("tableUser").innerText(dasdsdasd);
+                        var json = JSON.parse(xhttp.responseText);
+                        var gridView = document.getElementById("gridViewUser");
+                        var result = JSON.parse(json.d)
+                        //gridView.innerHTML = "";
+                        //console.log(result);
+                        var string = "";
+                        var table = document.getElementById("myTable");
+                        table.innerHTML = "";
+                         var row = table.insertRow(0);
+                              var cell1 = row.insertCell("Tên");
+                            var cell2 = row.insertCell("Ngày Sinh");
+                            var cell3 = row.insertCell("Tên Đăng Nhập");
+                            var cell4 = row.insertCell("Mật Khẩu");
+                             var cell5 = row.insertCell("Sửa");
+                              var cell6 = row.insertCell("Xóa")
+                        cell1.innerHTML = "Tên";    
+                        cell2.innerHTML = "Ngày Sinh";
+                             cell3.innerHTML = "Tên Đăng Nhập"
+                            cell4.innerHTML = "Mật Khẩu";
+                            cell5.innerHTML =  "Sửa";
+                        cell6.innerHTML = "Xóa"; 
+
+                        for (i in result) {
+                            var index = parseInt(i) + parseInt(1);
+                           // alert(result[i]["susername"] + "  " + i + "  " + index);
+                           // string = string + result[i]["susername"];
+
+                            
+                              var row = table.insertRow(index);
+                              var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3);
+                             var cell5 = row.insertCell(4);
+                              var cell6 = row.insertCell(5)
+                              cell1.innerHTML = result[i]["shoten"];
+                            cell2.innerHTML = result[i]["dngaysinh"];
+                             cell3.innerHTML = result[i]["susername"];
+                            cell4.innerHTML = result[i]["spass"];
+                            cell5.innerHTML =  "<a href="+"Add_Edit_Users.aspx?kind=2&tt="+result[i]["pk_iuserid"]+">Sửa</a>";
+                            cell6.innerHTML = "<Button onclick="+"'deleteUser(" +  result[i]["pk_iuserid"] + "); return false;' >Xoa</Button>";   
+                            //var div = document.createElement("div");
+                            //div.className = "ProductItem";
+                            ////Img
+                            //var img = document.createElement("img");
+                            //img.id = "itemGiayImg";
+                            //img.src = "/img/SanPham/" + result[i]["sAnhUrl"];
+                            ////TenDT
+                            //var TenDT = document.createElement("p");
+                            //TenDT.innerHTML = result[i]["sTendienthoai"];
+                            ////Gia
+                            //var Gia = document.createElement("p");
+                            //Gia.innerHTML = result[i]["mGiaban"];
+                            ////Chitiet
+                            //var chiTiet = document.createElement("a");
+                            //chiTiet.innerHTML = "Chi tiết";
+                            //chiTiet.href = "ChiTietSP.aspx?ID=" + result[i]["PK_iDienthoaiID"];
+
+                            //div.appendChild(img);
+                            //div.appendChild(TenDT);
+                            //div.appendChild(Gia);
+                            //div.appendChild(chiTiet);
+                            //listViewSP.appendChild(div);
+                         //   document.getElementById("tableUser").innerText("<tr>" +
+                       // "<td>" +  result[i]["susername"] + "</td>" +
+                       // "<td>" + result[i]["shoten"] + "</td>" +
+                     //   "<td>" + result[i]["dngaysinh"] + "</td>" +
+                      //  "<td>" + result[i]["pk_iuserid"] + "</td>"
+                      //  + "</tr > ");
+                        }
+                        //alert("Text: " + string);
+                        //document.getElementById("demo").innerHTML = string;
+                    }
+                };
+                xhttp.open("POST", "Users.aspx/deleteUser", true);
+                xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhttp.send('{idUser: "' + id+ '"}');
+            }
+
+
+
+
+                    //---------------------------------------------------
+
+    </script>
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+              
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="FrontEnd/TrangChu.aspx">Web Đọc báo</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="Default.aspx">Home</a></li>
+                        <li><a href="Users.aspx" runat="server" id="Users_List">Users</a></li>
+                        <li><a href="Articles_List.aspx">Quản lý bài viết</a></li>
+                        <li><a href="Add_Edit_Articles.aspx?kind=1" runat="server" id="Add_Edit_Articles">Thêm bài viết</a></li>
+                        <li><asp:LinkButton Text="Logout" runat="server" onclick="Logout_Click" /></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,162 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="FrontEnd.master.cs" Inherits="Bai21.FrontEnd.FrontEnd"%>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="PageTile" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/ckeditor/all.css" rel="stylesheet" />
+    <style type="text/css">
+        .border {
+            border: 1px solid black;
+            margin: 0 1%;
+            border-radius: 1%;
+        }
+
+        .center {
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content {
+            min-width: 800px;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            width: 200px;
+            height: 70px;
+        }
+
+        .linksocal {
+            padding-top: 0.5%;
+            text-decoration: none;
+        }
+
+            .linksocal:hover a {
+                text-decoration: none;
+            }
+
+            .linksocal ul, .linksocal ul li {
+                list-style: none;
+            }
+
+                .linksocal ul li {
+                    float: left;
+                }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+            .menu li {
+                margin: 1% 1% 0 1%;
+                display: inline-block !important;
+            }
+
+            .menu a {
+                margin-top: 1%;
+                text-decoration: none;
+                color: #fff;
+            }
+
+        .menuBottom a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .menuBottom ul, .menuBottom ul li {
+            list-style: none;
+        }
+
+        .footer {
+            display: flex;
+        }
+
+            .footer img {
+                width: 150px;
+                height: 50px;
+            }
+
+        a {
+            color: #000;
+        }
+
+            a:hover {
+                text-decoration: none;
+            }
+        .border-bottom{
+            border-bottom: 1px solid black;
+        }
+        .border-bottom:last-child{
+            border-bottom:none;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="bg-success navbar">
+            <div class="linksocal content">
+                
+                <div id="loginloregister" class="navbar-right" runat="server" style="margin-left:5%;">
+                    
+                </div>
+                <div class="navbar-right">
+                    <asp:TextBox runat="server" placeholder="Tìm kiếm" ID="txtSearch" style="margin-right: -5px;border: none;"/>
+                    <asp:Button Text="Search" runat="server" ID="btnSearch" OnClick="btnSearch_Click" style="border: none;" />
+                </div>
+            </div>
+        </div>
+        <div class="content logo">
+            <img src="../images/logo_thanhnien.png" />
+        </div>
+        <div class="navbar navbar-inverse content">
+
+            <asp:Repeater ID="rptMenu" runat="server">
+                <HeaderTemplate>
+                    <ul class="menu">
+                        <a href="TrangChu.aspx" class="fas fa-home"></a>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <li>
+                        <a href="KindArticle.aspx?tt=<%# Eval("PK_iTheloai") %>"><%#Eval("sTenTheloai")%></a>
+                    </li>
+                </ItemTemplate>
+                <FooterTemplate></ul></FooterTemplate>
+            </asp:Repeater>
+        </div>
+        <div class="row bg-success well content">
+            <asp:ContentPlaceHolder ID="PageBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="content menuBottom navbar-inverse">
+            <asp:Repeater ID="rptMenuBottom" runat="server">
+                <HeaderTemplate>
+                    <ul style="display: flex; flex-wrap: wrap;" class="text-center">
+                        <li style="width: 33.3%;"><a href="TrangChu.aspx">Trang Chủ</a></li>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <li style="width: 33.3%;"><a href="#"><%#Eval("sTenTheloai")%></a></li>
+                </ItemTemplate>
+                <FooterTemplate></ul></FooterTemplate>
+
+            </asp:Repeater>
+        </div>
+        <fo
+            <div style="margin-left: auto;">
+                <p> Web Nâng Cao  -  Nhóm 7</p>
+                
+            </div>
+        </footer>
+    </form>
+</body>
+</html>
